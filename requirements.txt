@@ -1,3 +1,4 @@
 ttslearn
 streamlit
 stqdm
+pytorch-lightning

@@ -27,7 +27,12 @@ stop_stage=0
 
 . $COMMON_ROOT/parse_options.sh || exit 1;
 
-dumpdir=dump
+dataroot=/content/drive/MyDrive/fusic/202204/downloads/audio
+wav_root=$dataroot/jsut_ver1.1/basic5000/wav
+lab_root=$dataroot/jsut-label/labels/basic5000
+CSV_ROOT=$dataroot/jsut_table
+savedir=/content/drive/MyDrive/fusic/202204/TTS_data
+dumpdir=$savedir/dump
 dump_org_dir=$dumpdir/${spk}_sr${sample_rate}/org
 dump_norm_dir=$dumpdir/${spk}_sr${sample_rate}/norm
 
@@ -72,7 +77,7 @@ fi
 if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
     echo "stage 1: Feature generation for Tacotron"
     for s in ${datasets[@]}; do
-        xrun python preprocess.py data/$s.list $wav_root $lab_root \
+        xrun python preprocess.py $savedir/data/$s.list $wav_root $lab_root \
             $dump_org_dir/$s --n_jobs $n_jobs \
             --sample_rate $sample_rate --mu $mu
     done
@@ -82,7 +87,7 @@ if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
     echo "stage 2: feature normalization"
     for typ in "tacotron"; do
        for inout in "out"; do
-            xrun python $COMMON_ROOT/fit_scaler.py data/train.list \
+            xrun python $COMMON_ROOT/fit_scaler.py $savedir/data/train.list \
                 $dump_org_dir/$train_set/${inout}_${typ} \
                 $dump_org_dir/${inout}_${typ}_scaler.joblib
         done

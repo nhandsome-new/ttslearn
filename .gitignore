@@ -454,4 +454,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# ngrok
+ngrok
+
 # End of https://www.toptal.com/developers/gitignore/api/osx,vim,linux,emacs,python,windows,pycharm,jupyternotebooks,vscode
