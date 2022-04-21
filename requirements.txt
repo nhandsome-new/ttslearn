@@ -2,3 +2,6 @@ ttslearn
 streamlit
 stqdm
 pytorch-lightning
+onnx
+onnxruntime
+hydra
